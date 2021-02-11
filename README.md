@@ -1,2 +1,3 @@
-# react-graphql-sick-fits
-Advanced React-GraphQL course project
+# Sick Fits
+
+Full Stack Advanced React-GraphQL course project
