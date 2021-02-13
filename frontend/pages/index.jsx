@@ -1,11 +1,6 @@
-import Page from '../components/Page';
+// import ProductsPage from './products';
 
-// components in pages folder are also pages
-// their names are the pathnames
-export default function IndexPage() {
-  return (
-    <>
-      <h1>Hello!</h1>
-    </> //
-  );
-}
+// export default ProductsPage;
+
+// imports the default from products and exports it in one line
+export { default } from './products';

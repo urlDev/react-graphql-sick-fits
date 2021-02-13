@@ -9,6 +9,7 @@ function createClient({ headers, initialState }) {
   return new ApolloClient({
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
+        // requiring something that isnt in db or something you cant query
         if (graphQLErrors)
           graphQLErrors.forEach(({ message, locations, path }) =>
             console.log(
@@ -24,6 +25,7 @@ function createClient({ headers, initialState }) {
       createUploadLink({
         uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
+          // when fetches data, it will also send the cookies
           credentials: 'include',
         },
         // pass the headers along from this request. This enables SSR with logged in state
