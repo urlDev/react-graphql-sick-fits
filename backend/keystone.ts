@@ -28,6 +28,14 @@ const { withAuth } = createAuth({
     fields: ['name', 'email', 'password'],
     // TODO: add in initial roles here
   },
+  // adding this gives us a new mutation method
+  // to be able to send a reset password link
+  passwordResetLink: {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async sendToken(args) {
+      console.log(args);
+    },
+  },
 });
 
 // Keystone config
