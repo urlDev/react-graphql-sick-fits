@@ -8,7 +8,9 @@ import {
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
+import { CartItem } from './schemas/CartItem';
 import { insertSeedData } from './seed-data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
   process.env.DATABASE_URL || 'mongodb://localhost/keystone-sick-fits';
@@ -33,7 +35,8 @@ const { withAuth } = createAuth({
   passwordResetLink: {
     // eslint-disable-next-line @typescript-eslint/require-await
     async sendToken(args) {
-      console.log(args);
+      // send the email
+      await sendPasswordResetEmail(args.token, args.identity);
     },
   },
 });
@@ -63,6 +66,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     // to show the keystone ui or not
     ui: {
