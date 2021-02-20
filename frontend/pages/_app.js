@@ -9,6 +9,7 @@ import Page from '../components/Page';
 // Applying custom nprogress styles
 import '../components/styles/nprogress.css';
 import withData from '../lib/withData';
+import { CartStateProvider } from '../lib/cartState';
 
 // Hooking NProgress with next js router. NProgress will know
 // when to begin showing the bar and when to end it
@@ -20,9 +21,11 @@ Router.events.on('routeChangeError', () => NProgress.done());
 // Component and pageProps are for NextJs to understand
 const MyApp = ({ Component, pageProps, apollo }) => (
   <ApolloProvider client={apollo}>
-    <Page>
-      <Component {...pageProps} />
-    </Page>
+    <CartStateProvider>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
+    </CartStateProvider>
   </ApolloProvider>
 );
 
