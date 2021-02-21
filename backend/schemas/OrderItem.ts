@@ -1,7 +1,7 @@
 import { integer, relationship, select, text } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 
-export const Product = list({
+export const OrderItem = list({
   // Todo
   // access:
 
@@ -17,7 +17,7 @@ export const Product = list({
     photo: relationship({
       // making a connection between image and product
       // referencing productImages product
-      ref: 'ProductImage.product',
+      ref: 'ProductImage',
       ui: {
         displayMode: 'cards',
         cardFields: ['image', 'altText'],
@@ -25,23 +25,8 @@ export const Product = list({
         inlineEdit: { fields: ['image', 'altText'] },
       },
     }),
-    status: select({
-      // creating different status options for the product
-      options: [
-        { label: 'Draft', value: 'DRAFT' },
-        { label: 'Available', value: 'AVAILABLE' },
-        { label: 'Unavailable', value: 'UNAVAILABLE' },
-      ],
-      defaultValue: 'DRAFT',
-      // we want status to be shown like this
-      ui: {
-        displayMode: 'segmented-control',
-        // fieldMode hidden means you can see the status after
-        // creating it
-        createView: { fieldMode: 'hidden' },
-      },
-    }),
     price: integer(),
-    // Todo: Photo
+    quantity: integer(),
+    order: relationship({ ref: 'Order.items' }),
   },
 });
