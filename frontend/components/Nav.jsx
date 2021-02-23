@@ -21,7 +21,8 @@ const Nav = () => {
             My Cart
             <CartCount
               count={user.cart.reduce(
-                (tally, cartItem) => tally + cartItem.quantity,
+                (tally, cartItem) =>
+                  tally + cartItem.quantity ? cartItem.quantity : 0,
                 0
               )}
             />
